@@ -7,8 +7,8 @@ authFacepp <- function(api_key, api_secret) {
                       class="FaceppProxy")
 }
 
-api_key <- "7fqokbmi8EBbos7qHEGgX-byGNlU55gZ"
-api_secret <- "WpQAK_vwVt5XjKo3He720lyr0uot57tc"
+api_key <- #fill with key
+api_secret <- #fill with secret
 image_file <- file_list[13]
 
 ex <- as.character(
@@ -170,3 +170,4 @@ ggplot(full, aes(x = ave_sentiment_img)) +
   scale_x_continuous(labels = scales::comma) + 
   scale_y_continuous(labels = scales::comma) + 
   theme_minimal()
+
