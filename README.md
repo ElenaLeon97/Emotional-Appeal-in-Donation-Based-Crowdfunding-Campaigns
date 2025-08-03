@@ -4,10 +4,10 @@
 - [Project Overview](#project-overview)
 - [Data Sources](#data-sources)
 - [Tools Used](#tools-used)
-- [Data Cleaning / Preparation](#data-cleaning--preparation)
+- [Data Cleaning/Preparation](#data-cleaningpreparation)
 - [Exploratory Data Analysis](#exploratory-data-analysis)
 - [Data Analysis](#data-analysis)
-- [Results / Findings](#results--findings)
+- [Results/Findings](#resultsfindings)
 - [Recommendations](#recommendations)
 - [Limitations](#limitations)
 - [References](#references)
@@ -15,103 +15,68 @@
 ---
 
 ## Project Overview
-
-This research project explores how **emotional appeal in the first stage of decision-making** influences the success of donation-based crowdfunding campaigns. The study analyzes how emotional content in **cover images and campaign titles** affects the amount of donations received.
-
-By examining 148 campaigns on GoFundMe, the project investigates:
-- Whether **positive or negative sentiment** in either modality (image or title) leads to better results.
-- Whether **congruence** (matching emotion across image and text) strengthens or weakens campaign performance.
+This project explores how emotional appeal in the *title* and *cover image* of donation-based crowdfunding campaigns affects their success. Specifically, it investigates how first impressions and emotional congruency influence donor decisions during the *initial decision-making stage*. Using sentiment analysis on both image and text, the project evaluates the effect of emotional valence on fundraising outcomes.
 
 ---
 
 ## Data Sources
-
-- **Primary dataset**: 148 donation-based campaigns from [GoFundMe](https://www.gofundme.com/)
-- Data includes:
-  - Campaign title and cover image
-  - Fundraising goal and amount raised
-  - Campaign category
-  - Number of donors
-  - Sentiment variables for both text and image
+- **Campaign Data**: 148 GoFundMe donation-based crowdfunding campaigns.
+- **Cover Images**: Crawled and analyzed using Face⁺⁺ API for facial emotion recognition.
+- **Titles**: Extracted text processed through sentiment analysis.
 
 ---
 
 ## Tools Used
-
-- **R**: Data processing and analysis
-- **Face++ API**: Facial emotion detection from cover images
-- **R packages**:
-  - `sentimentr` – sentiment scoring with valence shifters
-  - `tm`, `tidytext`, `tidyr`, `dplyr`, `lexicon` – text cleaning and manipulation
+- **R** – Data wrangling, sentiment analysis, regression modeling
+- **Face⁺⁺ API** – Facial Emotion Recognition
+- **SentimentR Package** – Text sentiment analysis
+- **Excel** – Initial filtering and manual inspection
 
 ---
 
-## Data Cleaning / Preparation
-
-The following steps were performed:
-- Removed campaigns with missing data
-- Cleaned and tokenized text data
-- Removed stop words and applied lemmatization
-- Processed images via API and averaged detected facial emotion scores
-- Scaled sentiment scores to a [-1, +1] range for consistency
+## Data Cleaning/Preparation
+- Web-scraped campaign metadata (title, image, amount raised, etc.)
+- Preprocessed titles: tokenization, stop-word removal, lemmatization
+- Extracted image emotion scores and normalized them to [-1, 1] valence scale
+- Created positive and negative valence variables for both modalities
 
 ---
 
 ## Exploratory Data Analysis
-
-Questions explored during EDA:
-- What is the average sentiment of titles and images?
-- Do different campaign categories vary in emotional tone?
-- Which categories raised the most money?
-
-> Notable Observation: Titles leaned negative on average, while images leaned positive — suggesting a possible mismatch in emotional tone.
+- Distribution of campaigns by category
+- Initial observation of emotional congruency (e.g. sad titles with smiling images)
+- Median title sentiment: **-0.044** (slightly negative)
+- Median image sentiment: **0.475** (slightly positive)
 
 ---
 
 ## Data Analysis
+- Statistical modeling and regression were used to estimate the influence of emotional valence on fundraising success.
+- Separate effects of image and text sentiment were analyzed, along with their interaction (emotional congruency).
 
-### Sentiment Analysis:
-- **Image**:  
-  Emotions such as happiness, sadness, and fear were extracted using **Face++** and aggregated per image.
-
-- **Text**:  
-  Titles were scored using the `sentimentr` package, which accounted for negators, intensifiers, and other shifters.
-
-### Variables Constructed:
-- `ave_sentiment` — average sentiment of the title
-- `ave_sentiment_img` — average sentiment of the image
-- `pos_ave_txt`, `neg_ave_txt` — split sentiment scores for textual content
-- `pos_ave_img`, `neg_ave_img` — split sentiment scores for image content
-
-### Moderation Modeling:
-- Regression models tested whether **emotional congruence between image and text** moderated the effect of sentiment on donations.
-  
 ---
 
-## Results / Findings
-1. Negative emotional appeal (in either image or text) increases donation amounts.
-2. Positive sentiment in titles is correlated with lower donation levels.
-3. Strong negative congruence (both sad image and sad title) leads to donor fatigue and fewer donations.
-4. Moderation effect: emotional congruence can reduce effectiveness when overly negative.
-5. Best results came from asymmetrical emotional signals, such as:
-  - Sad image + neutral title
-  - Neutral image + emotionally compelling title
-    
+## Results/Findings
+- **Negative emotional appeal**, especially in *either* title or image, significantly increases donation amounts.
+- **Positive appeal** in titles can actually *reduce* donation engagement.
+- Emotional *congruency* (e.g. both sad title and sad image) **can backfire** if negativity is too intense.
+- Optimal strategy: **subtle negative appeal in one modality**, not both.
+
 ---
 
 ## Recommendations
-- Use negative emotional cues sparingly — they trigger empathy but can overwhelm if overused.
-- Avoid matching negative titles with equally negative images — this emotional overload may repel donors.
-- Aim for emotional contrast (e.g., sad image with calm title) to balance urgency with approachability.
-- Refrain from using overly positive titles, especially when the campaign’s context is serious or tragic.
+- Use emotionally impactful *titles* with moderate negative sentiment to increase engagement.
+- Avoid overly positive or emotionally ambiguous language in titles.
+- Pair emotionally neutral or slightly positive *images* with emotional text for balance.
+- Do not overuse sadness or fear — emotional overload may reduce donor willingness.
 
 ---
 
 ## Limitations
-- Limited dataset size (148 campaigns) and time frame (2013–2020)
-- Face++ may misclassify subtle or culturally specific facial expressions
-- Sentiment analysis does not fully account for sarcasm or nuanced emotional tone
-- Emotional responses were inferred algorithmically, not measured through user feedback
+- Small dataset size (n = 148)
+- Potential bias in facial recognition tools, especially for non-standard expressions
+- Limited to campaigns in English and on GoFundMe only
+- Campaign success defined solely by monetary amount raised
 
 ---
 
