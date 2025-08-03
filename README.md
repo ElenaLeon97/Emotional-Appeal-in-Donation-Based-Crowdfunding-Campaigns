@@ -17,6 +17,8 @@
 ## Project Overview
 This project explores how emotional appeal in the *title* and *cover image* of donation-based crowdfunding campaigns affects their success. Specifically, it investigates how first impressions and emotional congruency influence donor decisions during the *initial decision-making stage*. Using sentiment analysis on both image and text, the project evaluates the effect of emotional valence on fundraising outcomes.
 
+[View Thesis Defence Deck](https://www.canva.com/design/DAGJLY6dUUM/Rtuhkk0gXaH0Z0c8bjhJJA/edit?utm_content=DAGJLY6dUUM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
 ---
 
 ## Data Sources
